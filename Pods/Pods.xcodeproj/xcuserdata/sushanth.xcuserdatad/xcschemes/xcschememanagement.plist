@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TextFieldEffects.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -22,7 +27,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C7B44BFFFA069D244535AD2535F72D5</key>
+		<key>882453F4D9CAFC6F77F86BEA8A191B10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB6CFF48031EAA7DE9E79210C46332B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

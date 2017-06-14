@@ -7,4 +7,7 @@ target 'playlist' do
 
   # Pods for playlist
 pod ‘Firebase’
+pod ‘Firebase/Core’
+pod ‘Firebase/Database’
+pod ’TextFieldEffects’
 end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2eE-4y-gje">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eq0-Nb-mCC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,57 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Songs List-->
+        <!--Playlists-->
+        <scene sceneID="e1V-OA-tke">
+            <objects>
+                <tableViewController id="Zld-Bh-xUo" customClass="PlaylistTableViewController" customModule="playlist" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qS8-5R-9Zl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistTableViewCell" id="I2C-MW-4Rz" customClass="PlaylistTableViewCell" customModule="playlist" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I2C-MW-4Rz" id="cJT-M5-cil">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8t-7y-A8h">
+                                            <rect key="frame" x="21" y="8" width="128" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="playlistLabel" destination="W8t-7y-A8h" id="YHe-jP-CDS"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Zld-Bh-xUo" id="XZb-It-jeo"/>
+                            <outlet property="delegate" destination="Zld-Bh-xUo" id="EM0-Cg-8YB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Playlists" id="DNR-Mh-9tC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bF6-TS-TbT">
+                            <connections>
+                                <action selector="creatingPlaylistName:" destination="Zld-Bh-xUo" id="xxz-S5-IPH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="createNewPlaylist" destination="bF6-TS-TbT" id="qct-uW-ARH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x8G-lO-a8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="276.61169415292358"/>
+        </scene>
+        <!--Songs-->
         <scene sceneID="gwf-tS-lh2">
             <objects>
                 <tableViewController id="2eE-4y-gje" customClass="songsList" customModule="playlist" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,10 +94,48 @@
                             <outlet property="delegate" destination="2eE-4y-gje" id="1hS-Ug-vL8"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Songs" id="MLy-Xm-Ywm"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQB-wk-rPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="613.60000000000002" y="301.79910044977515"/>
+            <point key="canvasLocation" x="-30" y="1066"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="DzT-s2-wSP">
+            <objects>
+                <tabBarController id="eq0-Nb-mCC" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="zpI-KE-xaS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="i1P-Af-C2x" kind="relationship" relationship="viewControllers" id="nL1-PA-RLa"/>
+                        <segue destination="2eE-4y-gje" kind="relationship" relationship="viewControllers" id="tgy-Ig-IPh"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FSo-46-LyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1881" y="154"/>
+        </scene>
+        <!--Playlist-->
+        <scene sceneID="D06-tt-CEb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i1P-Af-C2x" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Playlist" id="pNP-R5-KhQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="paY-LU-GkP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Zld-Bh-xUo" kind="relationship" relationship="rootViewController" id="tbD-Is-28y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yIZ-ig-9nI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-247" y="277"/>
         </scene>
     </scenes>
 </document>
