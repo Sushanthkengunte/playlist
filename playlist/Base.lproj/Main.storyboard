@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I2C-MW-4Rz" id="cJT-M5-cil">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8t-7y-A8h">
@@ -33,9 +33,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="playlistLabel" destination="W8t-7y-A8h" id="YHe-jP-CDS"/>
+                                    <segue destination="Ogu-yj-tdB" kind="show" identifier="showSongs" id="kWb-up-SZt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -59,6 +61,46 @@
             </objects>
             <point key="canvasLocation" x="764" y="276.61169415292358"/>
         </scene>
+        <!--Playlist Song Table View Controller-->
+        <scene sceneID="loE-Bb-iRg">
+            <objects>
+                <tableViewController id="Ogu-yj-tdB" customClass="PlaylistSongTableViewController" customModule="playlist" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ebL-Bp-smS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongsInPlaylist" id="MK1-8m-7Dv" customClass="PlaylistSongTableViewCell" customModule="playlist" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MK1-8m-7Dv" id="LPD-WQ-ttD">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SongList" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-Zd-2w1">
+                                            <rect key="frame" x="141" y="15" width="67" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="SongsList" destination="zpa-Zd-2w1" id="owk-Cn-3Bi"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ogu-yj-tdB" id="BJT-DK-kgG"/>
+                            <outlet property="delegate" destination="Ogu-yj-tdB" id="0rT-IN-jVy"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ihs-3D-6sS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1781" y="275"/>
+        </scene>
         <!--Songs-->
         <scene sceneID="gwf-tS-lh2">
             <objects>
@@ -72,7 +114,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0tP-o7-rgL" id="co7-jZ-9Ph">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="songs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aft-Hv-W11">
@@ -94,11 +136,11 @@
                             <outlet property="delegate" destination="2eE-4y-gje" id="1hS-Ug-vL8"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Songs" id="MLy-Xm-Ywm"/>
+                    <navigationItem key="navigationItem" title="Songs" id="aAo-EY-WS7"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQB-wk-rPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-30" y="1066"/>
+            <point key="canvasLocation" x="908" y="1065.5172413793105"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="DzT-s2-wSP">
@@ -111,7 +153,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="i1P-Af-C2x" kind="relationship" relationship="viewControllers" id="nL1-PA-RLa"/>
-                        <segue destination="2eE-4y-gje" kind="relationship" relationship="viewControllers" id="tgy-Ig-IPh"/>
+                        <segue destination="31f-gr-wIC" kind="relationship" relationship="viewControllers" id="tgy-Ig-IPh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSo-46-LyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -122,7 +164,7 @@
         <scene sceneID="D06-tt-CEb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i1P-Af-C2x" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Playlist" id="pNP-R5-KhQ"/>
+                    <tabBarItem key="tabBarItem" title="Playlist" image="playlist" id="pNP-R5-KhQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="paY-LU-GkP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -137,5 +179,28 @@
             </objects>
             <point key="canvasLocation" x="-247" y="277"/>
         </scene>
+        <!--Songs-->
+        <scene sceneID="UvO-DU-Q8W">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="31f-gr-wIC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Songs" image="songs" id="MLy-Xm-Ywm"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1sd-Sd-0J4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2eE-4y-gje" kind="relationship" relationship="rootViewController" id="WcD-SV-EnB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZyR-HC-Hh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-31.199999999999999" y="1065.5172413793105"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="playlist" width="25" height="25"/>
+        <image name="songs" width="25" height="25"/>
+    </resources>
 </document>

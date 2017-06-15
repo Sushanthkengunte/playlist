@@ -10,6 +10,8 @@
 		BD2986FB1EF18FBD00232333 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2986FA1EF18FBD00232333 /* PlaylistTableViewController.swift */; };
 		BD2986FD1EF18FDD00232333 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2986FC1EF18FDD00232333 /* PlaylistTableViewCell.swift */; };
 		BD2986FF1EF1917F00232333 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD2986FE1EF1917F00232333 /* GoogleService-Info.plist */; };
+		BD584AE41EF3389D009CF3DD /* PlaylistSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD584AE31EF3389D009CF3DD /* PlaylistSongTableViewCell.swift */; };
+		BD584AE61EF338C0009CF3DD /* PlaylistSongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD584AE51EF338C0009CF3DD /* PlaylistSongTableViewController.swift */; };
 		BDE9EBE81EF0D82700488043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE9EBE71EF0D82700488043 /* AppDelegate.swift */; };
 		BDE9EBED1EF0D82700488043 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE9EBEB1EF0D82700488043 /* Main.storyboard */; };
 		BDE9EBF21EF0D82700488043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDE9EBF01EF0D82700488043 /* LaunchScreen.storyboard */; };
@@ -26,6 +28,8 @@
 		BD2986FA1EF18FBD00232333 /* PlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewController.swift; sourceTree = "<group>"; };
 		BD2986FC1EF18FDD00232333 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		BD2986FE1EF1917F00232333 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BD584AE31EF3389D009CF3DD /* PlaylistSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistSongTableViewCell.swift; sourceTree = "<group>"; };
+		BD584AE51EF338C0009CF3DD /* PlaylistSongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistSongTableViewController.swift; sourceTree = "<group>"; };
 		BDE9EBE41EF0D82700488043 /* playlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = playlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE9EBE71EF0D82700488043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDE9EBEC1EF0D82700488043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 				BDE9EBF91EF0F6ED00488043 /* music.json */,
 				BDE9EBE71EF0D82700488043 /* AppDelegate.swift */,
 				BDE9EBEB1EF0D82700488043 /* Main.storyboard */,
+				BD584AE31EF3389D009CF3DD /* PlaylistSongTableViewCell.swift */,
+				BD584AE51EF338C0009CF3DD /* PlaylistSongTableViewController.swift */,
 				BD2986FA1EF18FBD00232333 /* PlaylistTableViewController.swift */,
 				BD2986FC1EF18FDD00232333 /* PlaylistTableViewCell.swift */,
 				BDE9EBFB1EF0F71D00488043 /* songsList.swift */,
@@ -231,7 +237,9 @@
 			files = (
 				BD2986FD1EF18FDD00232333 /* PlaylistTableViewCell.swift in Sources */,
 				BDE9EBFC1EF0F71D00488043 /* songsList.swift in Sources */,
+				BD584AE41EF3389D009CF3DD /* PlaylistSongTableViewCell.swift in Sources */,
 				BDE9EBFE1EF0F74300488043 /* EachSong.swift in Sources */,
+				BD584AE61EF338C0009CF3DD /* PlaylistSongTableViewController.swift in Sources */,
 				BDE9EBE81EF0D82700488043 /* AppDelegate.swift in Sources */,
 				BD2986FB1EF18FBD00232333 /* PlaylistTableViewController.swift in Sources */,
 			);

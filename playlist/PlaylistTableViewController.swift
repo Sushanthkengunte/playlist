@@ -11,6 +11,7 @@ import FirebaseDatabase
 
 class PlaylistTableViewController: UITableViewController {
     var listOfPlaylist = [String]()
+    //when '+' button is clicked
     @IBAction func creatingPlaylistName(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Create PlayList", message: "Provide a name for the playlist", preferredStyle: .alert)
         alertController.addTextField { (textField) in
@@ -30,6 +31,7 @@ class PlaylistTableViewController: UITableViewController {
     }
   
     @IBOutlet weak var createNewPlaylist: UIBarButtonItem!
+    // adds the playlist to the database checking if its already there
     func addToPlaylistDatabase(pName:String){
         let dbReference = FIRDatabase.database().reference()
         let playlistID = UUID().uuidString
@@ -43,7 +45,7 @@ class PlaylistTableViewController: UITableViewController {
             }
             else{
                 var pLists = snapshot.value as! [String:Any]
-                var array = pLists.keys
+                var array = Array(pLists.keys)
                 let withoutSpaces = pName.replacingOccurrences(of: " ", with: "%20")
                 let itemExists = array.contains(where: {
                     $0.range(of: withoutSpaces, options: .caseInsensitive) != nil
@@ -80,6 +82,7 @@ class PlaylistTableViewController: UITableViewController {
                 
             }
             else{
+                self.listOfPlaylist.removeAll()
                 var pLists = snapshot.value as! [String:Any]
                 var array1 = Array(pLists.keys)
                 
@@ -125,8 +128,19 @@ class PlaylistTableViewController: UITableViewController {
 
         return cell
     }
- 
-
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSongs"{
+            let rowSelected = tableView.indexPathForSelectedRow?.row
+            let destinationVC = segue.destination as! PlaylistSongTableViewController
+            destinationVC.playlistName = listOfPlaylist[rowSelected!]
+            destinationVC.navigationItem.title = listOfPlaylist[rowSelected!]
+            
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

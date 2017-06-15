@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseDatabase
+
 
 //model for song list
 struct songs{
@@ -95,18 +97,81 @@ class songsList: UITableViewController {
     }
     */
 
-    /*
+    private var listOfPlay = [String]()
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+         //   tableView.deleteRows(at: [indexPath], with: .fade)
+         
+            
+            let dbReference = FIRDatabase.database().reference()
+            // let playlistID = UUID().uuidString
+            dbReference.child("playlists").observeSingleEvent(of: .value, with: {(snapshot) in
+                if snapshot.childrenCount == 0{
+                    //TO-DO add alert controller to display no playlist yet and to create a new playlist
+                    // self.listOfPlaylist.append("No Playlist added")
+                    
+                }
+                else{
+                    //self.listOfPlaylist.removeAll()
+                    var pLists = snapshot.value as! [String:Any]
+                    self.listOfPlay = Array(pLists.keys)
+                    
+                    self.displayAllPlaylist(index: indexPath.row)
+                    
+                }
+                
+            })
+            
+            
+            
+            
+        }
     }
-    */
+    private func displayAllPlaylist(index : Int){
+        
+        let alertController = UIAlertController(title: "Add to PlayList", message: "Select the playlist to be added to", preferredStyle: .actionSheet)
+        for i in 0..<listOfPlay.count{
+        alertController.addAction(UIAlertAction(title: listOfPlay[i], style: .default, handler: { (Action) in
+            var temp = self.songList[index]
+            self.addToTheListOfPlaylist(name: temp.name, playlistName: self.listOfPlay[i])
+            
+            //self.addToPlaylistDatabase(pName: playlistName.text!)
+            
+        }))
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alertController, animated: true, completion: nil)
 
+    }
+
+    private func addToTheListOfPlaylist(name:String,playlistName:String){
+        let dbReference = FIRDatabase.database().reference()
+    
+        dbReference.child("playlistsDatabase").observeSingleEvent(of: .value, with: {(snapshot) in
+         
+            var pLists = snapshot.value as? [String:Any] ?? [:]
+                var arrayOfSongs = pLists[playlistName] ?? [String]()
+                var songList : [String] = arrayOfSongs as! [String]
+                songList.append(name)
+            
+                dbReference.child("playlistsDatabase/\(playlistName)").setValue(songList)
+                self.tableView.reloadData()
+           
+            
+        })
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "add"
+    }
+    override var prefersStatusBarHidden: Bool{
+        return true
+    }
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
