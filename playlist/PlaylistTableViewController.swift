@@ -4,19 +4,30 @@
 //
 //  Created by Sushanth on 6/14/17.
 //  Copyright © 2017 SuProject. All rights reserved.
-//
+//---------------------------------------------------
+// - The model for this view Controller is listOfPlaylist
+//    which contains the data to be displayed
+//---------------------------------------------------
+// * Files Required: 
+//   - UIKit
+//   -Firebase Database
+// * Pods required
+//   - Firebase/Database
 
 import UIKit
 import FirebaseDatabase
 
 class PlaylistTableViewController: UITableViewController {
     var listOfPlaylist = [String]()
-    //when '+' button is clicked
+    //when '+' button is clicked a alert controller with a text field is popped
     @IBAction func creatingPlaylistName(_ sender: UIBarButtonItem) {
+        
         let alertController = UIAlertController(title: "Create PlayList", message: "Provide a name for the playlist", preferredStyle: .alert)
+        
         alertController.addTextField { (textField) in
             
         }
+        //saves the text in the text field of the alert window
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (Action) in
             let playlistName = alertController.textFields![0] as UITextField
             
@@ -31,10 +42,11 @@ class PlaylistTableViewController: UITableViewController {
     }
   
     @IBOutlet weak var createNewPlaylist: UIBarButtonItem!
-    // adds the playlist to the database checking if its already there
+    // adds the playlist to the database checking if its already there by replacing space with %20
     func addToPlaylistDatabase(pName:String){
         let dbReference = FIRDatabase.database().reference()
         let playlistID = UUID().uuidString
+        // checks if there are exisitng playlist and saves it
         dbReference.child("playlists").observeSingleEvent(of: .value, with: {(snapshot) in
             if snapshot.childrenCount == 0{
                 let withoutSpaces = pName.replacingOccurrences(of: " ", with: "%20")
@@ -71,8 +83,9 @@ class PlaylistTableViewController: UITableViewController {
             
         })
         
-       // print(pName)
+       
     }
+    //displays the data in the table
     func populateTable(){
         let dbReference = FIRDatabase.database().reference()
         // let playlistID = UUID().uuidString
@@ -98,13 +111,13 @@ class PlaylistTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+    
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         populateTable()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     // MARK: - Table view data source
@@ -119,19 +132,20 @@ class PlaylistTableViewController: UITableViewController {
         return listOfPlaylist.count
     }
 
-    
+    // sets each cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell", for: indexPath) as! PlaylistTableViewCell
         cell.playlistLabel.text = listOfPlaylist[indexPath.row]
 
-        // Configure the cell...
+
 
         return cell
     }
-    
+    // hides the status Bar
     override var prefersStatusBarHidden: Bool{
         return true
     }
+    //while segueing to display the songs the playlist name is passed to the next view-Controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSongs"{
             let rowSelected = tableView.indexPathForSelectedRow?.row
@@ -141,49 +155,6 @@ class PlaylistTableViewController: UITableViewController {
             
         }
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

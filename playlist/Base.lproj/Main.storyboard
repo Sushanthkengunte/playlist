@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,15 +26,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8t-7y-A8h">
-                                            <rect key="frame" x="21" y="8" width="128" height="28"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8t-7y-A8h">
+                                            <rect key="frame" x="8" y="15.5" width="359" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="leadingMargin" secondItem="W8t-7y-A8h" secondAttribute="leading" id="2Gx-NS-8Oo"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="W8t-7y-A8h" secondAttribute="bottom" id="9ZA-Hi-uK3"/>
+                                        <constraint firstItem="W8t-7y-A8h" firstAttribute="centerX" secondItem="cJT-M5-cil" secondAttribute="centerX" id="LWK-p6-MQF"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="W8t-7y-A8h" secondAttribute="trailing" id="fvH-fc-V0R"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="playlistLabel" destination="W8t-7y-A8h" id="YHe-jP-CDS"/>
@@ -77,14 +83,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SongList" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-Zd-2w1">
-                                            <rect key="frame" x="141" y="15" width="67" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongList" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-Zd-2w1">
+                                            <rect key="frame" x="8" y="15.5" width="359" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="zpa-Zd-2w1" firstAttribute="centerX" secondItem="LPD-WQ-ttD" secondAttribute="centerX" id="HId-2S-DRK"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="zpa-Zd-2w1" secondAttribute="leading" id="Ogx-th-jcB"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zpa-Zd-2w1" secondAttribute="bottom" id="g3G-ol-b4R"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zpa-Zd-2w1" secondAttribute="trailing" id="sKc-fv-3QT"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="SongsList" destination="zpa-Zd-2w1" id="owk-Cn-3Bi"/>
@@ -96,10 +107,15 @@
                             <outlet property="delegate" destination="Ogu-yj-tdB" id="0rT-IN-jVy"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="2eE-4y-gje" kind="show" identifier="addSongToPlaylist" id="GYz-1k-C4G"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ihs-3D-6sS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1781" y="275"/>
+            <point key="canvasLocation" x="1780" y="274.81259370314842"/>
         </scene>
         <!--Songs-->
         <scene sceneID="gwf-tS-lh2">
@@ -109,6 +125,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="oneSong" id="0tP-o7-rgL" customClass="EachSong" customModule="playlist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -117,14 +134,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="songs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aft-Hv-W11">
-                                            <rect key="frame" x="52" y="14" width="97" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="songs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aft-Hv-W11">
+                                            <rect key="frame" x="8" y="14" width="359" height="21"/>
                                             <fontDescription key="fontDescription" name="Verdana-Italic" family="Verdana" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="aft-Hv-W11" secondAttribute="bottom" constant="1" id="3jB-Rx-3VZ"/>
+                                        <constraint firstItem="aft-Hv-W11" firstAttribute="centerX" secondItem="co7-jZ-9Ph" secondAttribute="centerX" id="SI7-Zd-pn1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="aft-Hv-W11" secondAttribute="trailing" id="XsQ-g9-vh3"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="aft-Hv-W11" secondAttribute="leading" id="uJL-OR-Mbj"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="songLabel" destination="aft-Hv-W11" id="iOY-qF-FCv"/>
@@ -134,11 +157,18 @@
                         <connections>
                             <outlet property="dataSource" destination="2eE-4y-gje" id="Fav-X1-fka"/>
                             <outlet property="delegate" destination="2eE-4y-gje" id="1hS-Ug-vL8"/>
+                            <outletCollection property="gestureRecognizers" destination="EKx-A7-ebA" appends="YES" id="Roi-fL-TMg"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Songs" id="aAo-EY-WS7"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQB-wk-rPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="EKx-A7-ebA">
+                    <connections>
+                        <action selector="reactiontoLongPress:" destination="2eE-4y-gje" id="oD8-4r-VGi"/>
+                        <outlet property="delegate" destination="2eE-4y-gje" id="P6p-Su-L6J"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="908" y="1065.5172413793105"/>
         </scene>
@@ -203,4 +233,7 @@
         <image name="playlist" width="25" height="25"/>
         <image name="songs" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="GYz-1k-C4G"/>
+    </inferredMetricsTieBreakers>
 </document>

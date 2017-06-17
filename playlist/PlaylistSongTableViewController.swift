@@ -4,18 +4,32 @@
 //
 //  Created by Sushanth on 6/15/17.
 //  Copyright © 2017 SuProject. All rights reserved.
-//
+//---------------------------------------------------
+// - The model for this view Controller is playlistName
+//    which contains the data to be varplayed
+//---------------------------------------------------
+// * Files Required:
+//   - UIKit
+//   -Firebase Database
+// * Pods required
+//   - Firebase/Database
+
 
 import UIKit
 
 import FirebaseDatabase
 
 class PlaylistSongTableViewController: UITableViewController {
-    var playlistName : String!{
-        didSet{
-            populateTable(playlistNameIs: playlistName)
-        }
+    // when playlistName is set the table is populated by getting the songs against that playlist
+    var playlistName : String! = nil
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        populateTable(playlistNameIs: playlistName)
     }
+    override var prefersStatusBarHidden: Bool{
+        return true
+    }
+    //gets the songs for a particular playlist
     func populateTable(playlistNameIs:String){
         let dbReference = FIRDatabase.database().reference()
         
@@ -23,9 +37,22 @@ class PlaylistSongTableViewController: UITableViewController {
             
             var pLists = snapshot.value as? [String:Any] ?? [:]
             var arrayOfSongs = pLists[playlistNameIs] ?? [String]()
+            
             var songList : [String] = arrayOfSongs as! [String]
+            
             //songList.append(name)
             self.songsInPlaylist = songList
+            if(self.songsInPlaylist.count == 0){
+                let alertController = UIAlertController(title: "Empty playlist", message: "Please add songs by selecting from the songs tab", preferredStyle: .alert)
+                
+              
+                alertController.addAction(UIAlertAction(title: "ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
           //  dbReference.child("playlistsDatabase/\(playlistName)").setValue(songList)
             self.tableView.reloadData()
             
@@ -33,17 +60,59 @@ class PlaylistSongTableViewController: UITableViewController {
         })
         
     }
+    // Override to support editing the table view.
+    
+  
     private var songsInPlaylist = [String]()
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            //   tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
+            let dbReference = FIRDatabase.database().reference()
+            // let playlistID = UUID().uuidString
+            dbReference.child("playlistsDatabase").observeSingleEvent(of: .value, with: {(snapshot) in
+                var pLists = snapshot.value as? [String:Any] ?? [:]
+                var arrayOfSongs = pLists[self.playlistName] ?? [String]()
+                
+                var songList1 : [String] = arrayOfSongs as! [String]
+                var deletedSong = songList1[indexPath.row]
+              
+                songList1.remove(at: indexPath.row)
+               self.songsInPlaylist = songList1
+                dbReference.child("playlistsDatabase/\(self.playlistName!)").setValue(songList1)
+                let alertController = UIAlertController(title: "Delete", message: "Successfully deleted:\(deletedSong)", preferredStyle: .alert)
+                
+                
+                alertController.addAction(UIAlertAction(title: "ok", style: .default, handler: { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alertController, animated: true, completion: nil)
+
+                self.tableView.reloadData()
+                
+            })
+            
+        }
+    }
+    //let rightTopButton
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let rightTopButton = UIBarButtonItem.init(title: "Add", style: .done, target: self, action: #selector(rightButtonAcion))
+        self.navigationItem.rightBarButtonItem = rightTopButton
     }
-
+    func rightButtonAcion(sender:UIBarButtonItem){
+        performSegue(withIdentifier: "addSongToPlaylist", sender: sender)
+    
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addSongToPlaylist"{
+            let vC = segue.destination as! songsList
+            vC.playlistFromSpngsInPlaylist = playlistName
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,49 +141,6 @@ class PlaylistSongTableViewController: UITableViewController {
     }
 
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
 }
