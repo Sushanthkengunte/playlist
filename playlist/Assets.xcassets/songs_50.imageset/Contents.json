@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "songs_50.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "playlist2x.png",
       "scale" : "2x"
     },
     {

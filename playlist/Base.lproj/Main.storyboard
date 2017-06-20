@@ -194,7 +194,7 @@
         <scene sceneID="D06-tt-CEb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i1P-Af-C2x" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Playlist" image="playlist" id="pNP-R5-KhQ"/>
+                    <tabBarItem key="tabBarItem" title="Playlist" image="playlist_50" id="pNP-R5-KhQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="paY-LU-GkP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -213,7 +213,7 @@
         <scene sceneID="UvO-DU-Q8W">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="31f-gr-wIC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Songs" image="songs" id="MLy-Xm-Ywm"/>
+                    <tabBarItem key="tabBarItem" title="Songs" image="songs_50" id="MLy-Xm-Ywm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1sd-Sd-0J4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -230,8 +230,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="playlist" width="25" height="25"/>
-        <image name="songs" width="25" height="25"/>
+        <image name="playlist_50" width="50" height="50"/>
+        <image name="songs_50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GYz-1k-C4G"/>
