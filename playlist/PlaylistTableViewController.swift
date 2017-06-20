@@ -57,7 +57,7 @@ class PlaylistTableViewController: UITableViewController {
             }
             else{
                 var pLists = snapshot.value as! [String:Any]
-                var array = Array(pLists.keys)
+                let array = Array(pLists.keys)
                 let withoutSpaces = pName.replacingOccurrences(of: " ", with: "%20")
                 let itemExists = array.contains(where: {
                     $0.range(of: withoutSpaces, options: .caseInsensitive) != nil
@@ -96,11 +96,11 @@ class PlaylistTableViewController: UITableViewController {
             }
             else{
                 self.listOfPlaylist.removeAll()
-                var pLists = snapshot.value as! [String:Any]
+                let pLists = snapshot.value as! [String:Any]
                 var array1 = Array(pLists.keys)
                 
                 for i in 0..<array1.count{
-                    var newWithSpace = array1[i].replacingOccurrences(of: "%20", with: " ")
+                    let newWithSpace = array1[i].replacingOccurrences(of: "%20", with: " ")
                     self.listOfPlaylist.append(newWithSpace)
                 }
                 self.tableView.reloadData()

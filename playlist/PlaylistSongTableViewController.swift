@@ -36,9 +36,9 @@ class PlaylistSongTableViewController: UITableViewController {
         dbReference.child("playlistsDatabase").observeSingleEvent(of: .value, with: {(snapshot) in
             
             var pLists = snapshot.value as? [String:Any] ?? [:]
-            var arrayOfSongs = pLists[playlistNameIs] ?? [String]()
+            let arrayOfSongs = pLists[playlistNameIs] ?? [String]()
             
-            var songList : [String] = arrayOfSongs as! [String]
+            let songList : [String] = arrayOfSongs as! [String]
             
             //songList.append(name)
             self.songsInPlaylist = songList
@@ -74,10 +74,10 @@ class PlaylistSongTableViewController: UITableViewController {
             // let playlistID = UUID().uuidString
             dbReference.child("playlistsDatabase").observeSingleEvent(of: .value, with: {(snapshot) in
                 var pLists = snapshot.value as? [String:Any] ?? [:]
-                var arrayOfSongs = pLists[self.playlistName] ?? [String]()
+                let arrayOfSongs = pLists[self.playlistName] ?? [String]()
                 
                 var songList1 : [String] = arrayOfSongs as! [String]
-                var deletedSong = songList1[indexPath.row]
+                let deletedSong = songList1[indexPath.row]
               
                 songList1.remove(at: indexPath.row)
                self.songsInPlaylist = songList1

@@ -45,7 +45,7 @@ class songsList: UITableViewController {
                 do{
                     let jsonResult = try JSONSerialization.jsonObject(with: data1, options: .mutableContainers) as! [NSDictionary]
                     for i in 0..<jsonResult.count{
-                        let each = jsonResult[i] as! NSDictionary
+                        let each = jsonResult[i] //as! NSDictionary
                         let album = each["albums"] as! NSArray
                         // let songs = album["songs"]
                         for j in 0..<album.count{
@@ -55,7 +55,7 @@ class songsList: UITableViewController {
                                 
                                 let oneSong = songofablbumList[k] as! NSDictionary
                                 print(oneSong)
-                                songList.append(songs.init(name: oneSong["title"] as! String ?? "", length: oneSong["length"] as! String ?? ""))
+                                songList.append(songs.init(name: oneSong["title"] as? String ?? "", length: oneSong["length"] as? String ?? ""))
                                 
                             }
                             
@@ -92,7 +92,7 @@ class songsList: UITableViewController {
     @IBAction func reactiontoLongPress(_ sender: UILongPressGestureRecognizer) {
         
         let touchLocation = sender.location(in: tableView)
-        var indexPath : IndexPath? = tableView.indexPathForRow(at: touchLocation)
+        let indexPath : IndexPath? = tableView.indexPathForRow(at: touchLocation)
         if sender.state == .began{
             if let indexOfRow = indexPath{
                 let dbReference = FIRDatabase.database().reference()
@@ -105,7 +105,7 @@ class songsList: UITableViewController {
                     }
                     else{
                         
-                        var pLists = snapshot.value as! [String:Any]
+                        let pLists = snapshot.value as! [String:Any]
                         self.listOfPlay = Array(pLists.keys)
                         //let cell : UITableViewCell = tableView.cellForRow(at: indexPath)
                         self.displayOptionsWhenLongPress(index: indexOfRow.row)
@@ -165,7 +165,7 @@ class songsList: UITableViewController {
             }
             else{
                 var pLists = snapshot.value as! [String:Any]
-                var array = Array(pLists.keys)
+                let array = Array(pLists.keys)
                 let withoutSpaces = pName.replacingOccurrences(of: " ", with: "%20")
                 let itemExists = array.contains(where: {
                     $0.range(of: withoutSpaces, options: .caseInsensitive) != nil
@@ -229,7 +229,7 @@ class songsList: UITableViewController {
      
         alertController.addAction(UIAlertAction(title: "Create New playlist", style: .default, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
-            var temp = self.songList[index]
+            let temp = self.songList[index]
             
             self.newPlaylist(name: temp.name)
             
@@ -243,7 +243,7 @@ class songsList: UITableViewController {
         self.present(alertController, animated: true, completion: nil)
         }else{
         
-            var temp = self.songList[index]
+            let temp = self.songList[index]
             self.addToPlaylistDatabase(pName: playlistFromSpngsInPlaylist)
             self.addToTheListOfPlaylist(name: temp.name, playlistName: playlistFromSpngsInPlaylist)
              let alertController = UIAlertController(title: "Added", message: "\(temp.name) added to \(playlistFromSpngsInPlaylist!)", preferredStyle: .actionSheet)
@@ -259,7 +259,7 @@ class songsList: UITableViewController {
         let alertController = UIAlertController(title: "Add to PlayList", message: "Select the playlist to be added to", preferredStyle: .alert)
         for i in 0..<listOfPlay.count{
             alertController.addAction(UIAlertAction(title: listOfPlay[i].replacingOccurrences(of: "%20", with: " "), style: .default, handler: { (Action) in
-                var temp = self.songList[index]
+                let temp = self.songList[index]
                 
                 self.addToTheListOfPlaylist(name: temp.name, playlistName: self.listOfPlay[i].replacingOccurrences(of: "%20", with: " "))
                 self.dismiss(animated: true, completion: nil)
@@ -287,7 +287,7 @@ class songsList: UITableViewController {
         dbReference.child("playlistsDatabase").observeSingleEvent(of: .value, with: {(snapshot) in
             
             var pLists = snapshot.value as? [String:Any] ?? [:]
-            var arrayOfSongs = pLists[playlistName] ?? [String]()
+            let arrayOfSongs = pLists[playlistName] ?? [String]()
             var songList : [String] = arrayOfSongs as! [String]
             songList.append(name)
             
