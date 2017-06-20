@@ -6,7 +6,7 @@
 //  Copyright © 2017 SuProject. All rights reserved.
 //---------------------------------------------------
 // - The model for this view Controller is playlistName
-//    which contains the data to be varplayed
+//    which contains the data to be displayed
 //---------------------------------------------------
 // * Files Required:
 //   - UIKit

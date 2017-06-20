@@ -5,6 +5,15 @@
 //  Created by Sushanth on 6/14/17.
 //  Copyright © 2017 SuProject. All rights reserved.
 //
+//---------------------------------------------------
+// - The model for this view Controller is songs
+//    which contains the data to be displayed
+//---------------------------------------------------
+// * Files Required:
+//   - UIKit
+//   -Firebase Database
+// * Pods required
+//   - Firebase/Database
 
 import UIKit
 import FirebaseDatabase
@@ -47,7 +56,7 @@ class songsList: UITableViewController {
                     for i in 0..<jsonResult.count{
                         let each = jsonResult[i] //as! NSDictionary
                         let album = each["albums"] as! NSArray
-                        // let songs = album["songs"]
+
                         for j in 0..<album.count{
                             let songsInAlbum = album[j] as! NSDictionary
                             let songofablbumList = songsInAlbum["songs"] as! NSArray
@@ -63,7 +72,6 @@ class songsList: UITableViewController {
                         
                         
                     }
-                    //print(jsonResult)
                 }catch{
                     print(error)
                 }
@@ -88,7 +96,7 @@ class songsList: UITableViewController {
     
     
     private var listOfPlay = [String]()
-    
+
     @IBAction func reactiontoLongPress(_ sender: UILongPressGestureRecognizer) {
         
         let touchLocation = sender.location(in: tableView)
@@ -99,18 +107,23 @@ class songsList: UITableViewController {
                 
                 dbReference.child("playlists").observeSingleEvent(of: .value, with: {(snapshot) in
                     if snapshot.childrenCount == 0{
-                        //TO-DO add alert controller to display no playlist yet and to create a new playlist
-                        // self.listOfPlaylist.append("No Playlist added")
                         
+                        let alertController = UIAlertController(title: "Playlist", message: "No playlist Created", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "Create new playlist", style: .default, handler: { (action) in
+                            let song_name = self.songList[indexOfRow.row].name
+                        self.newPlaylist(name: song_name)
+                        }))
+                        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+                            self.dismiss(animated: true, completion: nil)
+                        }))
+                        self.present(alertController, animated: true, completion: nil)
                     }
                     else{
                         
                         let pLists = snapshot.value as! [String:Any]
                         self.listOfPlay = Array(pLists.keys)
-                        //let cell : UITableViewCell = tableView.cellForRow(at: indexPath)
                         self.displayOptionsWhenLongPress(index: indexOfRow.row)
                         
-                       // self.displayAllPlaylist(index: indexOfRow.row)
                         
                     }
                     
@@ -160,7 +173,6 @@ class songsList: UITableViewController {
                 let withoutSpaces = pName.replacingOccurrences(of: " ", with: "%20")
                 dbReference.child("playlists").setValue([withoutSpaces:playlistID])
                 
-               // self.populateTable()
                 
             }
             else{
@@ -185,8 +197,7 @@ class songsList: UITableViewController {
                     
                     pLists[withoutSpaces] = playlistID
                     dbReference.child("playlists").setValue(pLists)
-                    
-                   // self.populateTable()
+    
                 }
             }
             
@@ -194,35 +205,7 @@ class songsList: UITableViewController {
         
         
     }
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     //   tableView.deleteRows(at: [indexPath], with: .fade)
-     
-     
-     let dbReference = FIRDatabase.database().reference()
-     // let playlistID = UUID().uuidString
-     dbReference.child("playlists").observeSingleEvent(of: .value, with: {(snapshot) in
-     if snapshot.childrenCount == 0{
-     //TO-DO add alert controller to display no playlist yet and to create a new playlist
-     // self.listOfPlaylist.append("No Playlist added")
-     
-     }
-     else{
-     //self.listOfPlaylist.removeAll()
-     var pLists = snapshot.value as! [String:Any]
-     self.listOfPlay = Array(pLists.keys)
-     
-     self.displayAllPlaylist(index: indexPath.row)
-     
-     }
-     
-     })
-     
-     }
-     }*/
+
     private func displayOptionsWhenLongPress(index:Int){
         if playlistFromSpngsInPlaylist == nil{
         let alertController = UIAlertController(title: "Choose", message: "Select your preference", preferredStyle: .actionSheet)
@@ -269,7 +252,6 @@ class songsList: UITableViewController {
                 }))
                 self.present(aC, animated: true, completion: nil)
                 
-                //self.addToPlaylistDatabase(pName: playlistName.text!)
                 
             }))
         }
@@ -297,36 +279,10 @@ class songsList: UITableViewController {
             
         })
     }
-    
-    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "add"
-    }
+
+   
     override var prefersStatusBarHidden: Bool{
         return true
     }
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
