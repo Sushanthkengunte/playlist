@@ -7,7 +7,6 @@
 # - PlaylistSongTableViewController: Displays all the songs in a particular playlist.
 #--------------------------------------------------------------
 # Flow
-# Splash screen is displayed and further,
 # The home page is displayed with two tabs which displays the playlists and songs
 # User can create a new playlist by clicking the '+' on the right top corner.
 #       1) should provide a name of the playlist
